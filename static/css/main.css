@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+
+
+nav{
+    display: flex;
+    align-items: center;
+    height: 10vh;
+    width: 100%;
+    padding-left: 10%;
+    background-color: #A59D84;
+}
+.nav a{
+    text-decoration: none;
+    color: azure;
+    font-size: "Inter", serif;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+
+#content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 100%;
+    background-color: #ECEBDE;
+}
+
+#content > div{
+    height: 90%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #D7D3BF;
+    border-radius: 1rem;
+    box-shadow: 5px 7px 20px#888888;
+    padding-top: 2rem;
+}
+
+#content h1{
+    font-style: "Inter", serif;
+    font-size: 36px;
+    font-weight: 700;
+}
+#content form{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    align-items: center;
+}
+#content form input{
+    height: 2rem;
+    width: 80%;
+    background-color: #A59D84;
+    border-radius: 6px;
+    
+}
+
+.image-section{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.image-section div:last-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0% 10%;
+}
+.img-preview{
+    width: 100%;
+    height: 80%;
+    background-image: none;
+    padding: 0% 10%;
+}
+.image-section button{
+    height: 3rem;
+    width: 50%;
+    background-color: #A59D84;
+    border: 0;
+    border-radius: 10px;
+    font-family: "Inter", serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+}
+.img-preview img{
+    width: 100%;
+    
+}

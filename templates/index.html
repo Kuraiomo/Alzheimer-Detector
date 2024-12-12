@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div>
+    <h1>Image Classifier</h1>
+    <!-- Form for file upload -->
+    <form id="upload-file" method="post" enctype="multipart/form-data">
+        <label for="imageUpload" class="upload-label">
+            Choose Image...
+        </label>
+        <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg" onchange="previewImage()">
+    </form>
+
+    <!-- Preview image and predict button -->
+    <div class="image-section">
+        <div class="img-preview">
+            <img id="imagePreview" src="" alt="Image Preview">
+        </div>
+        <div><button type="button" id="btn-predict" onclick="predictImage()">Predict!</button></div>
+    </div>
+
+    <!-- Loader for when prediction is in progress -->
+    <div class="loader" id="loader">
+        <p>Loading...</p>
+    </div>
+
+    <!-- Prediction result -->
+    <h3 id="result">
+        <span></span>
+    </h3>
+
+</div>
+
+<script>
+    // Preview the image when the file is selected
+    function previewImage() {
+        var file = document.getElementById("imageUpload").files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById("imagePreview").src = e.target.result;
+                document.querySelector(".image-section").style.display = "block";
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Function to send the image file to the server for prediction
+    function predictImage() {
+        var form = document.getElementById("upload-file");
+        var formData = new FormData(form);
+        
+        // Show the loader while waiting for the prediction
+        document.getElementById("loader").style.display = "block";
+        document.getElementById("result").style.display = "none"; // Hide previous result
+
+        // Make the POST request to Flask
+        fetch("/predict", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("loader").style.display = "none"; // Hide the loader
+            document.getElementById("result").style.display = "block"; // Show the result
+            document.getElementById("result").innerHTML = "<span>" + data + "</span>"; // Display result
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            document.getElementById("loader").style.display = "none"; // Hide the loader
+            document.getElementById("result").style.display = "block";
+            document.getElementById("result").innerHTML = "<span>Error in prediction</span>"; // Error message
+        });
+    }
+</script>
+
+{% endblock %}
